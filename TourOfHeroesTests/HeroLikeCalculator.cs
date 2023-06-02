@@ -1,6 +1,6 @@
 namespace TourOfHeroesTests
 {
-    public class UnitTest1
+    public class HeroLikeCalculator
     {
         [Fact]
         public void Test1()
