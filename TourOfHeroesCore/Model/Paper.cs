@@ -10,7 +10,11 @@
         public Like ILikeCount { get;set; }
         public DontLike IDontLikeCount { get;set; }
         public Hero Hero { get;set; }
-        
+
+        public int GetPaperPopularityValue()
+        {
+            return ILikeCount.Value > IDontLikeCount.Value ? 1 : -1;
+        }
     }
 }
 

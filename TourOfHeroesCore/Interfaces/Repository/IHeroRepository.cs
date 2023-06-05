@@ -12,5 +12,6 @@ namespace TourOfHeroesCore.Interfaces.Repository
         Task<HeroDao> GetHeroById(IdDao id);
         Task<IdDao> AddHero(HeroDao heroDao);
         Task<PaperDao[]> GetHeroPapers(IdDao heroId);
+        Task UpdateHero(HeroDao heroToUpdate);
     }
 }
