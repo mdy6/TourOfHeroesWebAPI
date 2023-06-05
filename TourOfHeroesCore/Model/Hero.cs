@@ -13,7 +13,7 @@ namespace TourOfHeroesCore.Model
         public PowerType PowerType { get; set; }
         public Strength Strength { get; set; }
         public Popularity Popularity { get;set; }
-        public Paper[] Papers { get; set; }
+        public Paper[] Papers { get; set; } = new Paper[0];
         public DateTimeOffset LastUpdate { get;set; }
     }
 }

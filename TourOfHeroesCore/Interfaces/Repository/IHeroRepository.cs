@@ -9,6 +9,7 @@ namespace TourOfHeroesCore.Interfaces.Repository
 {
     public interface IHeroRepository
     {
+        Task<HeroDao> GetHeroById(IdDao id);
         Task<IdDao> AddHero(HeroDao heroDao);
         Task<PaperDao[]> GetHeroPapers(IdDao heroId);
     }

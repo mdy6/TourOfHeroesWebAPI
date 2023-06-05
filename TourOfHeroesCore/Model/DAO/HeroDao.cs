@@ -10,5 +10,6 @@ namespace TourOfHeroesCore.Model.DAO
 
     public record HeroDao(int HeroId, string Name, int PowerTypeId, int Strenght, int Popularity, DateTimeOffset LastUpdate): IdDao(HeroId);
 
-    public record PaperDao(int PaperId, string Title, string Description, string Content, DateTimeOffset PublicationDate, int Like, int DontLike): IdDao(PaperId);
+    public record PaperDao(int PaperId, string Title, string Description, string Content, DateTimeOffset PublicationDate, int Like, int DontLike, int HeroId): IdDao(PaperId);
+
 }

@@ -9,6 +9,7 @@
         public DateTimeOffset PublicationDate { get;set; }
         public Like ILikeCount { get;set; }
         public DontLike IDontLikeCount { get;set; }
+        public Hero Hero { get;set; }
         
     }
 }

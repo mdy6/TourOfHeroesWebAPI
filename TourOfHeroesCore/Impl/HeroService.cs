@@ -7,6 +7,7 @@ namespace TourOfHeroesCore.Impl
 {
     public class HeroService : IHeroService
     {
+
         private readonly IHeroRepository heroRepository;
 
         public HeroService(IHeroRepository heroRepository)
@@ -16,11 +17,13 @@ namespace TourOfHeroesCore.Impl
         public async Task ComputeHeroLikeCount(Id<int> id)
         {
             var heroPapers = await heroRepository.GetHeroPapers(id.ToDao());
+            if(heroPapers.Length == 0) {return; }
         }
 
-        public Task<Hero> GetHeroById(Id<int> id)
+        public async Task<Hero> GetHeroById(Id<int> id)
         {
-            throw new NotImplementedException();
+            var heroById = await heroRepository.GetHeroById(id.ToDao());
+            return heroById.ToDomain();
         }
     }
 }

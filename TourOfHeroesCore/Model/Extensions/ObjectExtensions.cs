@@ -19,13 +19,27 @@ namespace TourOfHeroesCore.Model.Extensions
                 IDontLikeCount = new DontLike() { Value = paperDao.DontLike },
                 ILikeCount = new Like() { Value = paperDao.Like },
                 PublicationDate = paperDao.PublicationDate,
-                Title = paperDao.Title
+                Title = paperDao.Title,
+                Hero = new Hero() { Id = new IdInt(paperDao.HeroId)  }
             };
         }
 
         public static IdDao ToDao(this Id<int> id) 
         {
             return new IdDao(id.Value);
+        }
+
+        public static Hero ToDomain(this HeroDao heroDao)
+        {
+            return new Hero()
+            {
+                Id = new IdInt(heroDao.Id),
+                LastUpdate= heroDao.LastUpdate,
+                Name = heroDao.Name,
+                Popularity = new Popularity() { Value = heroDao.Popularity },
+                PowerType = new PowerType() { Id = new IdInt(heroDao.PowerTypeId) },
+                Strength = new Strength() { Value = heroDao.Strenght },
+            };
         }
     }
 }
