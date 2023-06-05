@@ -8,11 +8,11 @@ namespace TourOfHeroesCore.Model
 {
     public class Hero : IObjectId<int>
     {
-        public Id<int> Id { get; set; }
-        public string Name { get; set; }
-        public PowerType PowerType { get; set; }
-        public Strength Strength { get; set; }
-        public Popularity Popularity { get;set; }
+        public Id<int> Id { get; set; } = new IdInt(0);
+        public string Name { get; set; } = string.Empty;
+        public PowerType PowerType { get; set; } =new PowerType();
+        public Strength Strength { get; set; } = new Strength();
+        public Popularity Popularity { get; set; } = new Popularity();
         public Paper[] Papers { get; set; } = new Paper[0];
         public DateTimeOffset LastUpdate { get;set; }
     }
