@@ -4,11 +4,11 @@ DDD archi hexa et micro service
 
 Journal des héros
 - il existe 4 types d'origine de pouvoir : air terre eau feu 
-- le profil d'un héro permet de voir ses caractérisiques et statistique ( nom, type de pouvoir, force, nombre d'action, nombre j'aime, liste d'article sur ce héro
+- le profil d'un héro permet de voir ses caractérisiques et statistique ( nom, type de pouvoir, force, nombre d'action, sa côte de popularité, liste d'article sur ce héro
 - Un héro a un profil sur lequel on peut voir son actualité
 -on peut voir l'actualité à la une sur la page d'accueil
 - chaque article publié sur un héros est favorable ou défavorable ( si le nombre de j'aime sur l'article est supérieur au nombre de je n'aime pas, le héro gagne un point sinon il en perd un)
-- le nombre de point d'un héro peut être négatif
+- la côte de popularité d'un héro peut être négatif
 -un article a pour propriété : le titre, le héro associé( on pourra y associé plusieurs héros à l'avenir) un nombre j'aime et un nombre de je n'aime pas, la date de publication 
 -la force va de 0 à 10
 use case:
@@ -30,4 +30,4 @@ use case:
 => en tant que héro quand j'ai un article avec 0 j'aime et plus de 0 j'aime pas je perds un point
 => en tant que héro quand j'ai un article avec strictement plus 0 j'aime et 0 j'aime pas je gagne 1 point
 => en tant que héro quand j'ai un  article avec 0 j'aime  et 0 je n'aime pas, je gagne 0 point
-=> le nombre point et calculé dynamiquement en fonction du nombre j'aime ou je n'aime pas si le nombre de j'aime et je n'aime pas sur un article évolu dans le temps le nombre de point du héro aussi 
+=> la côte de popularité est calculé dynamiquement en fonction du nombre j'aime ou je n'aime pas sur un article associé au héro, si le nombre de j'aime et je n'aime pas sur un article évolu dans le temps le nombre de point du héro aussi 
