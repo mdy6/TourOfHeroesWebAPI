@@ -31,6 +31,11 @@ namespace TourOfHeroesCore.Impl
             await heroRepository.UpdateHero(heroToUpdate);
         }
 
+        public Task DeleteHero(Id<int> id)
+        {
+            return heroRepository.DeleteHero(id.ToDao());
+        }
+
         public async Task<Hero> GetHeroById(Id<int> id)
         {
             var heroById = await heroRepository.GetHeroById(id.ToDao());
@@ -38,6 +43,12 @@ namespace TourOfHeroesCore.Impl
             var foudedHero = heroById.ToDomain();
             foudedHero.Papers = heroPapers.Select(p => p.ToDomain()).ToArray();
             return foudedHero;
+        }
+
+        public async Task<Hero[]> GetHeroes()
+        {
+            var heroes = await heroRepository.GetHeroes();
+            return heroes.Select(p => p.ToDomain()).ToArray();
         }
     }
 }

@@ -24,10 +24,14 @@ use case:
 => en tant que lecteur je peux voir les articles sur le réseau
 => en tant que lecteur je peux mettre j'aime sur un article 
 => en tant que lecteur je peux mettre je n'aime sur un article 
-=> en tant que lecteur je  peux reçois des notifications quand un article est publié
+=> en tant que lecteur je reçois des notifications quand un article est publié
 => en tant que lecteur j'ai accès au profil du héro
 => en tant que héros quand je n'ai aucune article publié mon nombre de point est à 0
 => en tant que héro quand j'ai un article avec 0 j'aime et plus de 0 j'aime pas je perds un point
 => en tant que héro quand j'ai un article avec strictement plus 0 j'aime et 0 j'aime pas je gagne 1 point
 => en tant que héro quand j'ai un  article avec 0 j'aime  et 0 je n'aime pas, je gagne 0 point
 => la côte de popularité est calculé dynamiquement en fonction du nombre j'aime ou je n'aime pas sur un article associé au héro, si le nombre de j'aime et je n'aime pas sur un article évolu dans le temps le nombre de point du héro aussi 
+si le nombre de j'aime est égale au nombre de je n'aime pas alors la popularité passé à 0
+=> quand un héro est supprimé tout les article associé sont supprimé
+=> quand l'article est mise à jour les lecteurs sont notifié
+=> quand la popularité d'un héro augmente les lecteurs sont notifié
