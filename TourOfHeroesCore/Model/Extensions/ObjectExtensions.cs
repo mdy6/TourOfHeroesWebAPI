@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TourOfHeroesCore.Model.DAO;
+﻿using TourOfHeroesCore.Model.DAO;
 
 namespace TourOfHeroesCore.Model.Extensions
 {
@@ -13,7 +8,7 @@ namespace TourOfHeroesCore.Model.Extensions
         {
             return new Paper()
             {
-                Id = IdInt.Create(paperDao.IdValue),
+                Id = IdInt.Create(paperDao.PaperId),
                 Content = new PaperContent(paperDao.Content),
                 Description = paperDao.Description,
                 IDontLikeCount = new DontLike() { Value = paperDao.DontLike },
@@ -51,7 +46,7 @@ namespace TourOfHeroesCore.Model.Extensions
         {
             return new Hero()
             {
-                Id = IdInt.Create(heroDao.IdValue),
+                Id = IdInt.Create(heroDao.HeroId),
                 LastUpdate= heroDao.LastUpdate,
                 Name = heroDao.Name,
                 Popularity = new Popularity() { Value = heroDao.Popularity },
