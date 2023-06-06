@@ -9,6 +9,5 @@ namespace TourOfHeroesCore.Interfaces
         Task<IdInt> Publish(Paper paper);
         Task<IdInt> UpdatePaper(Paper existingPaper);
         Task DeletePaperByHeroId(Id<int> heroId);
-
     }
 }
