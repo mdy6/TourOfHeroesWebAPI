@@ -8,7 +8,7 @@ namespace TourOfHeroesCore.Model
 {
     public class Hero : IObjectId<int>
     {
-        public Id<int> Id { get; set; } = new IdInt(0);
+        public Id<int> Id { get; set; } = IdInt.Create(0);
         public string Name { get; set; } = string.Empty;
         public PowerType PowerType { get; set; } =new PowerType();
         public Strength Strength { get; set; } = new Strength();

@@ -14,5 +14,10 @@
         public IdInt(int idValue) : base(idValue)
         {
         }
+
+        public static IdInt Create(int IdValue)
+        {
+            return new IdInt(IdValue);
+        }
     }
 }

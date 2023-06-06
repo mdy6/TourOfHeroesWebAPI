@@ -6,6 +6,7 @@ using TourOfHeroesCore.Model.Extensions;
 
 namespace TourOfHeroesCore.Impl
 {
+
     public class HeroService : IHeroService
     {
 

@@ -13,15 +13,15 @@ namespace TourOfHeroesCore.Model.Extensions
         {
             return new Paper()
             {
-                Id = new IdInt(paperDao.Id),
+                Id = IdInt.Create(paperDao.IdValue),
                 Content = new PaperContent(paperDao.Content),
                 Description = paperDao.Description,
                 IDontLikeCount = new DontLike() { Value = paperDao.DontLike },
                 ILikeCount = new Like() { Value = paperDao.Like },
                 PublicationDate = paperDao.PublicationDate,
                 Title = paperDao.Title,
-                Hero = new Hero() { Id = new IdInt(paperDao.HeroId)  },
-                Author = new Author() { Id = new IdInt(paperDao.AuthorId) }
+                Hero = new Hero() { Id = IdInt.Create(paperDao.HeroId)  },
+                Author = new Author() { Id = IdInt.Create(paperDao.AuthorId) }
             };
         }
 
@@ -42,16 +42,20 @@ namespace TourOfHeroesCore.Model.Extensions
         {
             return new IdDao(id.Value);
         }
+        public static IdInt ToDomain(this IdDao id) 
+        {
+            return IdInt.Create(id.IdValue);
+        }
 
         public static Hero ToDomain(this HeroDao heroDao)
         {
             return new Hero()
             {
-                Id = new IdInt(heroDao.Id),
+                Id = IdInt.Create(heroDao.IdValue),
                 LastUpdate= heroDao.LastUpdate,
                 Name = heroDao.Name,
                 Popularity = new Popularity() { Value = heroDao.Popularity },
-                PowerType = new PowerType() { Id = new IdInt(heroDao.PowerTypeId) },
+                PowerType = new PowerType() { Id = IdInt.Create(heroDao.PowerTypeId) },
                 Strength = new Strength() { Value = heroDao.Strenght },
             };
         }

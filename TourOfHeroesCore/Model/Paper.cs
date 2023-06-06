@@ -2,7 +2,7 @@
 {
     public class Paper : IObjectId<int>
     {
-        public Id<int> Id { get; set; } = new IdInt(0);
+        public Id<int> Id { get; set; } = IdInt.Create(0);
         public string Title { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
         public PaperContent Content { get; set; } = new PaperContent();
