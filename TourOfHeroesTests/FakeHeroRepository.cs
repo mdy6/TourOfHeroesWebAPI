@@ -57,7 +57,11 @@ namespace TourOfHeroesTests
 
         public Task DeleteHero(IdDao idDao)
         {
-            throw new NotImplementedException();
+            var heroToDelete = _heroDao.FirstOrDefault(t => t.HeroId == idDao.IdValue);
+             if(heroToDelete == null)
+            return Task.CompletedTask;
+            _heroDao.Remove(heroToDelete);
+            return Task.CompletedTask;
         }
 
         public Task<HeroDao[]> GetHeroes()

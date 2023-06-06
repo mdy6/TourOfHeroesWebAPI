@@ -22,17 +22,18 @@ namespace TourOfHeroesTests
             _readerNotifier = new Mock<IReaderNotifier<PaperEventArgs>>();
 
             EventBus eventBus = new EventBus();
-            PaperEventHandlers paperEventHandlers = new PaperEventHandlers(_readerNotifier.Object);
-            eventBus.Subscribe(paperEventHandlers);
             _paperRepository = new FakePaperRepository();
             _paperService = new PaperService(_paperRepository, eventBus);
+
+            PaperEventHandlers paperEventHandlers = new PaperEventHandlers(_readerNotifier.Object,_paperService);
+            eventBus.Subscribe(paperEventHandlers);
         }
 
         [Fact]
         public async Task when_paper_is_published_then_reader_are_notified()
         {
-            var newPaper = new Paper() 
-            { 
+            var newPaper = new Paper()
+            {
                 Author = new Author(),
                 Hero = new Hero()
             };

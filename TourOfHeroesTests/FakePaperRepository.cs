@@ -14,6 +14,11 @@ namespace TourOfHeroesTests
             return Task.FromResult(new IdDao(_paperDaos.Count));
         }
 
+        public Task DeleteByHeroId(IdDao idDao)
+        {
+            throw new NotImplementedException();
+        }
+
         public Task<PaperDao> GetPaperById(IdDao id)
         {
             return Task.FromResult(_paperDaos.FirstOrDefault(t => t.PaperId == id.IdValue) ?? DEFAULT_PAPER);

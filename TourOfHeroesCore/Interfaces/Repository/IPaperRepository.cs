@@ -8,5 +8,6 @@ namespace TourOfHeroesCore.Interfaces.Repository
         Task<PaperDao> GetPaperById(IdDao id);
         Task<IdDao> AddPapers(PaperDao paper);
         Task<IdDao> Update(PaperDao paperDao);
+        Task DeleteByHeroId(IdDao idDao);
     }
 }

@@ -1,5 +1,7 @@
 using FluentAssertions;
 using Moq;
+using TourOfHeroesCore.Event;
+using TourOfHeroesCore.Event.HeroEvent;
 using TourOfHeroesCore.Impl;
 using TourOfHeroesCore.Interfaces;
 using TourOfHeroesCore.Interfaces.Helpers;
@@ -14,12 +16,14 @@ namespace TourOfHeroesTests
         private IHeroService _heroService;
         private Mock<IPaperService> _paperService;
         private Mock<IDateTimeProvider> _dateTimeProvider;
+        private Mock<IEventBus> _eventBus;
         public HeroServiceTests()
         {
             _dateTimeProvider = new Mock<IDateTimeProvider>();
             _dateTimeProvider.Setup(x => x.GetDateTime()).Returns(DateTimeOffset.UtcNow);
+            _eventBus = new Mock<IEventBus>();
             _paperRepository = new FakePaperRepository();
-            _heroService = new HeroService(new FakeHeroRepository(_paperRepository), _dateTimeProvider.Object);
+            _heroService = new HeroService(new FakeHeroRepository(_paperRepository), _dateTimeProvider.Object, _eventBus.Object);
             _paperService = new Mock<IPaperService>();
         }
 
@@ -74,7 +78,7 @@ namespace TourOfHeroesTests
                 })
                  .Returns(Task.FromResult(new IdInt(3)));
 
-            await _paperService.Object.Publish(new Paper { Title="new paper on hero 3" });
+            await _paperService.Object.Publish(new Paper { Title = "new paper on hero 3" });
 
             await _heroService.ComputeHeroLikeCount(heroId);
 
@@ -82,6 +86,32 @@ namespace TourOfHeroesTests
 
             heroResutlt.Papers.Count().Should().Be(2);
             heroResutlt.Popularity.Value.Should().Be(0);
+        }
+
+
+        [Fact]
+        public async Task when_a_hero_popularity_increasing_reader_should_be_notified()
+        {
+            IdInt heroId = IdInt.Create(3);
+
+            await _heroService.ComputeHeroLikeCount(heroId);
+
+            Hero heroResutlt = await _heroService.GetHeroById(heroId);
+
+            heroResutlt.Papers.Count().Should().Be(1);
+            heroResutlt.Popularity.Value.Should().Be(1);
+
+            _eventBus.Verify(m => m.Publish(It.IsAny<HeroPopularityIncreaseEvent>()), Times.Once());
+        }
+
+        [Fact]
+        public async Task when_a_hero_is_deleted_a_event_is_send()
+        {
+            IdInt heroId = IdInt.Create(3);
+
+            await _heroService.DeleteHero(heroId);
+
+            _eventBus.Verify(m => m.Publish(It.IsAny<HeroDeletedEvent>()), Times.Once());
         }
     }
 }
