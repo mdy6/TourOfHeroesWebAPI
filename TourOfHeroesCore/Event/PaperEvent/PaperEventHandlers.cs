@@ -7,9 +7,9 @@ namespace TourOfHeroesCore.Event.PaperEvent
 {
     public class PaperEventHandlers : IEventHandler
     {
-        private readonly IReaderNotifier<Paper> readerNotifier;
+        private readonly IReaderNotifier<PaperEventArgs> readerNotifier;
 
-        public PaperEventHandlers(IReaderNotifier<Paper> readerNotifier)
+        public PaperEventHandlers(IReaderNotifier<PaperEventArgs> readerNotifier)
         {
             this.readerNotifier = readerNotifier;
         }
@@ -17,9 +17,15 @@ namespace TourOfHeroesCore.Event.PaperEvent
         public Task HandleEvent(object ev)
         {
             if(ev is PaperPublishedEvent)
-                return readerNotifier.NotifyReaders(new PaperNotification());
+            {
+                var publishedEvent = ev as PaperPublishedEvent;
+                return readerNotifier.NotifyReaders(new PaperNotification(publishedEvent?.EventArgs));
+            }
             if(ev is PaperUpdatedEvent)
-                return readerNotifier.NotifyReaders(new PaperNotification());
+            {
+                var updatedEvent = ev as PaperUpdatedEvent;
+                return readerNotifier.NotifyReaders(new PaperNotification(updatedEvent?.EventArgs));
+            }
             return Task.CompletedTask;
         }
     }

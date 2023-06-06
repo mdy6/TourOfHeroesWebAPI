@@ -1,7 +1,9 @@
-﻿namespace TourOfHeroesCore.Interfaces
+﻿using TourOfHeroesCore.Impl;
+
+namespace TourOfHeroesCore.Interfaces
 {
     public interface IReaderNotifier<T>
     {
-        Task NotifyReaders(INotification<T> notification);
+        Task NotifyReaders(Notification<T> notification);
     }
 }

@@ -1,6 +1,7 @@
 ﻿namespace TourOfHeroesCore.Interfaces
 {
-    public interface INotification<T>
+    public interface INotification
     {
+        Task Notify();
     }
 }

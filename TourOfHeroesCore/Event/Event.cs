@@ -4,11 +4,11 @@ namespace TourOfHeroesCore.Event
 {
     public class Event<T> : Event
     {
-        public T obj { get; }
+        public T EventArgs { get; }
 
         public Event(T obj) : base()
         {
-            this.obj = obj;
+            this.EventArgs = obj;
         }
     }
 

@@ -16,10 +16,10 @@ namespace TourOfHeroesTests
     {
         private IPaperRepository _paperRepository;
         private IPaperService _paperService;
-        private Mock<IReaderNotifier<Paper>> _readerNotifier;
+        private Mock<IReaderNotifier<PaperEventArgs>> _readerNotifier;
         public PaperServiceTests()
         {
-            _readerNotifier = new Mock<IReaderNotifier<Paper>>();
+            _readerNotifier = new Mock<IReaderNotifier<PaperEventArgs>>();
 
             EventBus eventBus = new EventBus();
             PaperEventHandlers paperEventHandlers = new PaperEventHandlers(_readerNotifier.Object);
@@ -39,7 +39,7 @@ namespace TourOfHeroesTests
 
             await _paperService.Publish(newPaper);
             (await _paperRepository.GetPapers()).Length.Should().Be(1);
-            _readerNotifier.Verify(m => m.NotifyReaders(It.IsAny<INotification<Paper>>()), Times.Once());
+            _readerNotifier.Verify(m => m.NotifyReaders(It.IsAny<Notification<PaperEventArgs>>()), Times.Once());
         }
 
         [Fact]
@@ -65,7 +65,7 @@ namespace TourOfHeroesTests
             paperDaos[0].Title.Should().Be(newTitle);
             paperDaos[0].AuthorId.Should().Be(3);
 
-            _readerNotifier.Verify(m => m.NotifyReaders(It.IsAny<INotification<Paper>>()), Times.Once());
+            _readerNotifier.Verify(m => m.NotifyReaders(It.IsAny<Notification<PaperEventArgs>>()), Times.Once());
         }
     }
 }
