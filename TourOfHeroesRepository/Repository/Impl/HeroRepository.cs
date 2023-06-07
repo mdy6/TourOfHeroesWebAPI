@@ -6,6 +6,7 @@ using System.Data.SqlClient;
 using TourOfHeroesCore.Configuration;
 using TourOfHeroesCore.Interfaces.Repository;
 using TourOfHeroesCore.Model.DTO;
+using TourOfHeroesRepository.Repository.DAO;
 
 namespace TourOfHeroesRepository.Repository.Impl
 {
@@ -39,7 +40,7 @@ namespace TourOfHeroesRepository.Repository.Impl
         {
             using var connection = new SqlConnection(databaseInfoOptions.Value.ConnectionString);
             var getHeroesQuery = GetSqlQueryContent("GetHeroes.sql");
-            return (await connection.QueryAsync<HeroDto>(getHeroesQuery)).ToArray();
+            return (await connection.QueryAsync<HeroDao>(getHeroesQuery)).Select(dao => dao.ToDto()).ToArray();
         }
 
         private string GetSqlQueryContent(string sqlFileName)
