@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[Paper]
 (
-	[PaperId] INT NOT NULL , 
+	[PaperId] INT NOT NULL  IDENTITY(1,1) , 
     [Title] VARCHAR(250) NOT NULL, 
     [Description] VARBINARY(500) NULL, 
     [Content] VARBINARY(MAX) NULL, 

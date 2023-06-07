@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[Hero]
 (
-	[HeroId] INT NOT NULL PRIMARY KEY, 
+	[HeroId] INT NOT NULL PRIMARY KEY IDENTITY(1,1), 
     [Name] VARCHAR(50) NOT NULL, 
     [PowerType] INT NOT NULL, 
     [Strength] INT NOT NULL, 
