@@ -29,18 +29,18 @@ namespace TourOfHeroesTests
         {
             var heroDaoToInsert = heroDao with
             {
-                IdValue = currentId
+                HeroId = currentId
             };
 
             _heroDao.Add(heroDaoToInsert);
             currentId++;
-            return Task.FromResult(new IdDao(heroDaoToInsert.IdValue));
+            return Task.FromResult(new IdDao(heroDaoToInsert.HeroId));
 
         }
 
         public Task<HeroDao> GetHeroById(IdDao id)
         {
-            return Task.FromResult(_heroDao.FirstOrDefault(h => h.IdValue == id.IdValue) ?? DEFAULT_HERO);
+            return Task.FromResult(_heroDao.FirstOrDefault(h => h.HeroId == id.IdValue) ?? DEFAULT_HERO);
         }
 
         public async Task<PaperDao[]> GetHeroPapers(IdDao heroId)
@@ -50,7 +50,7 @@ namespace TourOfHeroesTests
 
         public Task UpdateHero(HeroDao heroToUpdate)
         {
-            var indexToUpdate = _heroDao.FindIndex(h => h.IdValue == heroToUpdate.IdValue);
+            var indexToUpdate = _heroDao.FindIndex(h => h.HeroId == heroToUpdate.HeroId);
             _heroDao[indexToUpdate] = heroToUpdate;
             return Task.CompletedTask;
         }

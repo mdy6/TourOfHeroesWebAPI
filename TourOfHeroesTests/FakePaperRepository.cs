@@ -33,7 +33,7 @@ namespace TourOfHeroesTests
         {
             var index = _paperDaos.FindIndex(p => p.PaperId == paperDao.PaperId);
             _paperDaos[index] = paperDao;
-            return Task.FromResult(new IdDao(_paperDaos[index].IdValue));
+            return Task.FromResult(new IdDao(_paperDaos[index].HeroId));
         }
     }
 }

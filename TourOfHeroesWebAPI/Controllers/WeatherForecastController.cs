@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace TourOfHeroesWebAPI.Controllers
 {
+
     [ApiController]
     [Route("[controller]")]
     public class WeatherForecastController : ControllerBase
