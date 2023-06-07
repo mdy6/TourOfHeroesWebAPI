@@ -1,0 +1,1 @@
+﻿select [HeroId],[Name],[PowerType],[Strength], [Popularity], [LastUpdate] from [Hero]
