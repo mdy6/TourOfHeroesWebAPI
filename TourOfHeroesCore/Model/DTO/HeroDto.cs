@@ -7,6 +7,6 @@ using System.Threading.Tasks;
 namespace TourOfHeroesCore.Model.DTO
 {
 
-    public record HeroDto(int HeroId, string Name, int PowerTypeId, int Strenght, int Popularity, DateTimeOffset LastUpdate);
+    public record HeroDto(int HeroId, string Name, int PowerTypeId, int Strength, int Popularity, DateTimeOffset LastUpdate);
 
 }
