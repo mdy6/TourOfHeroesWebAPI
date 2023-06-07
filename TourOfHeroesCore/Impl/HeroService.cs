@@ -24,10 +24,10 @@ namespace TourOfHeroesCore.Impl
         }
         public async Task ComputeHeroLikeCount(Id<int> id)
         {
-            var heroPapers = await heroRepository.GetHeroPapers(id.ToDao());
+            var heroPapers = await heroRepository.GetHeroPapers(id.ToDto());
             if (heroPapers.Length == 0) { return; }
             var newHeroPopularity = heroPapers.Select(p => p.ToDomain().GetPaperPopularityValue()).Sum();
-            var currentHero = await heroRepository.GetHeroById(id.ToDao());
+            var currentHero = await heroRepository.GetHeroById(id.ToDto());
             var heroToUpdate = currentHero with
             {
                 Popularity = newHeroPopularity,
@@ -45,14 +45,14 @@ namespace TourOfHeroesCore.Impl
 
         public async Task DeleteHero(Id<int> id)
         {
-            await heroRepository.DeleteHero(id.ToDao());
+            await heroRepository.DeleteHero(id.ToDto());
             await eventBus.Publish(new HeroDeletedEvent(new HeroEventArgs(id.Value)));
         }
 
         public async Task<Hero> GetHeroById(Id<int> id)
         {
-            var heroById = await heroRepository.GetHeroById(id.ToDao());
-            var heroPapers = await heroRepository.GetHeroPapers(id.ToDao());
+            var heroById = await heroRepository.GetHeroById(id.ToDto());
+            var heroPapers = await heroRepository.GetHeroPapers(id.ToDto());
             var foudedHero = heroById.ToDomain();
             foudedHero.Papers = heroPapers.Select(p => p.ToDomain()).ToArray();
             return foudedHero;
@@ -62,6 +62,12 @@ namespace TourOfHeroesCore.Impl
         {
             var heroes = await heroRepository.GetHeroes();
             return heroes.Select(p => p.ToDomain()).ToArray();
+        }
+
+        public async Task<Id<int>> CreateHero(Hero hero)
+        {
+            var insertedHeroId = await heroRepository.AddHero(hero.ToDto());
+            return IdInt.Create(insertedHeroId.IdValue);
         }
     }
 }

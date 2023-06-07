@@ -20,7 +20,7 @@ namespace TourOfHeroesCore.Model.Extensions
             };
         }
 
-        public static PaperDto ToDao(this Paper paper)
+        public static PaperDto ToDto(this Paper paper)
         {
             return new PaperDto(paper.Id.Value,
                                 paper.Title,
@@ -33,7 +33,7 @@ namespace TourOfHeroesCore.Model.Extensions
                                 paper.Author.Id.Value);
         }
 
-        public static IdDto ToDao(this Id<int> id) 
+        public static IdDto ToDto(this Id<int> id) 
         {
             return new IdDto(id.Value);
         }
@@ -51,8 +51,13 @@ namespace TourOfHeroesCore.Model.Extensions
                 Name = heroDao.Name,
                 Popularity = new Popularity() { Value = heroDao.Popularity },
                 PowerType = new PowerType() { Id = IdInt.Create(heroDao.PowerTypeId) },
-                Strength = new Strength() { Value = heroDao.Strenght },
+                Strength = new Strength() { Value = heroDao.Strength },
             };
+        }
+
+        public static HeroDto ToDto(this Hero hero) 
+        {
+            return new HeroDto(hero.Id.Value, hero.Name, hero.PowerType.Id.Value, hero.Strength.Value, hero.Popularity.Value, hero.LastUpdate);
         }
     }
 }

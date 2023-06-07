@@ -1,21 +1,30 @@
-﻿namespace TourOfHeroesCore.Event
+﻿using System;
+
+namespace TourOfHeroesCore.Event
 {
     public class EventBus : IEventBus
     {
         private readonly Queue<Event> queue = new Queue<Event>();
         private readonly List<IEventHandler> eventHandlers = new List<IEventHandler>();
 
-        public Task Publish(Event evToPub)
+        public async Task Publish(Event evToPub)
         {
             queue.Enqueue(evToPub);
-            foreach(var e in eventHandlers)
-                e.HandleEvent(evToPub);
-            return Task.CompletedTask;
+            Console.WriteLine($"Event publish {evToPub.ToString()}");
+            if(eventHandlers.Count== 0)
+                Console.WriteLine("no one subscribed");
+            foreach (var e in eventHandlers)
+            {
+                Console.WriteLine($"Event publish {evToPub.ToString()} to {e.GetType().FullName} ");
+                await e.HandleEvent(evToPub);
+            }
+            return;
         }
 
         public Task Subscribe(IEventHandler eventHandler)
         {
             eventHandlers.Add(eventHandler);
+            Console.WriteLine($"{eventHandler.GetType().FullName} subscribed to bus");
             return Task.CompletedTask;
         }
 

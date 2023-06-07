@@ -71,6 +71,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Queries\GetHeroes.sql" />
+    <None Include="Queries\InsertHero.sql" />
+    <None Include="Queries\DeleteHero.sql" />
   </ItemGroup>
   <PropertyGroup>
     <PostBuildEvent>copy $(ProjectDir)Queries\* $(SolutionDir)</PostBuildEvent>

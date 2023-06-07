@@ -1,5 +1,8 @@
+using System.Collections.Immutable;
 using TourOfHeroesCore.Configuration;
 using TourOfHeroesCore.Event;
+using TourOfHeroesCore.Event.HeroEvent;
+using TourOfHeroesCore.Event.PaperEvent;
 using TourOfHeroesCore.Impl;
 using TourOfHeroesCore.Impl.Helpers;
 using TourOfHeroesCore.Interfaces;
@@ -15,6 +18,10 @@ builder.Services.AddSingleton<IEventBus, EventBus>();
 builder.Services.AddSingleton<IDateTimeProvider, DateTimeProvider>();
 builder.Services.AddScoped<IHeroRepository, HeroRepository>();
 builder.Services.AddScoped<IHeroService, HeroService>();
+builder.Services.AddSingleton<IReaderNotifier<HeroEventArgs>, ReaderNotifierHero>();
+builder.Services.AddSingleton<IReaderNotifier<PaperEventArgs>, ReaderNotifierHero>();
+builder.Services.AddSingleton<IEventHandler, HeroEventHandlers>();
+builder.Services.AddSingleton<IEventHandler, PaperEventHandlers>();
 
 
 
@@ -37,5 +44,13 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+
+
+var bus = app.Services.GetService<IEventBus>();
+var handlers = app.Services.GetServices<IEventHandler>();
+
+handlers.ToList().ForEach(handler => bus.Subscribe(handler));
+
 
 app.Run();

@@ -14,7 +14,8 @@ namespace TourOfHeroesCore.Event.HeroEvent
 
         public Task HandleEvent(object ev)
         {
-            if(ev is HeroPopularityIncreaseEvent)
+            Console.WriteLine($"Event received {ev.ToString()}");
+            if (ev is HeroPopularityIncreaseEvent)
             {
                 var heroPopularityIncrease = ev as HeroPopularityIncreaseEvent;
                 return _notifier.NotifyReaders(new HeroNotification(heroPopularityIncrease.EventArgs));

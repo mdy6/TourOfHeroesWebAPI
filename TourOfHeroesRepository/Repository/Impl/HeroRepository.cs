@@ -1,5 +1,4 @@
 ﻿using Dapper;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using System.Data;
 using System.Data.SqlClient;
@@ -7,6 +6,7 @@ using TourOfHeroesCore.Configuration;
 using TourOfHeroesCore.Interfaces.Repository;
 using TourOfHeroesCore.Model.DTO;
 using TourOfHeroesRepository.Repository.DAO;
+using TourOfHeroesRepository.Repository.Exceptions;
 
 namespace TourOfHeroesRepository.Repository.Impl
 {
@@ -21,14 +21,28 @@ namespace TourOfHeroesRepository.Repository.Impl
 
         public IDbConnection DbConnection { get; }
 
-        public Task<IdDto> AddHero(HeroDto heroDao)
+        public async Task<IdDto> AddHero(HeroDto heroDto)
         {
-            throw new NotImplementedException();
+            using var connection = GetConnection();
+            var heroToInsert = heroDto.ToDao();
+            var id = await connection.QueryAsync<int>(GetSqlQueryContent("InsertHero.sql"),
+                                                      new { Name = heroToInsert.Name, Popularity = heroToInsert.Popularity, Strength = heroToInsert.Strength, PowerTypeId = heroToInsert.PowerTypeId, LastUpdate = heroToInsert.LastUpdate });
+            if (id is null || id.FirstOrDefault() == 0)
+                throw new ObjectNotInsertedException("This hero has not been inserted");
+            return new IdDto(id.FirstOrDefault());
+
         }
 
         public Task DeleteHero(IdDto idDao)
         {
-            throw new NotImplementedException();
+            using var connection = GetConnection();
+            connection.QueryAsync(GetSqlQueryContent("DeleteHero.sql"), new {HeroId =  idDao.IdValue});
+            return Task.CompletedTask;
+        }
+
+        private SqlConnection GetConnection()
+        {
+            return new SqlConnection(databaseInfoOptions.Value.ConnectionString);
         }
 
         public Task<HeroDto> GetHeroById(IdDto id)
@@ -38,7 +52,7 @@ namespace TourOfHeroesRepository.Repository.Impl
 
         public async Task<HeroDto[]> GetHeroes()
         {
-            using var connection = new SqlConnection(databaseInfoOptions.Value.ConnectionString);
+            using var connection = GetConnection();
             var getHeroesQuery = GetSqlQueryContent("GetHeroes.sql");
             return (await connection.QueryAsync<HeroDao>(getHeroesQuery)).Select(dao => dao.ToDto()).ToArray();
         }

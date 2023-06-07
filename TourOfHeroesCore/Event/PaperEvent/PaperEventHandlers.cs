@@ -31,7 +31,8 @@ namespace TourOfHeroesCore.Event.PaperEvent
             }
             if(ev is HeroDeletedEvent)
             {
-
+                var deletedHeroEvent = ev as HeroDeletedEvent;
+                paperService.DeletePaperByHeroId(IdInt.Create(deletedHeroEvent.EventArgs.Id));
             }
             return Task.CompletedTask;
         }

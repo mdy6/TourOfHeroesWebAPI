@@ -26,7 +26,7 @@ namespace TourOfHeroesCore.Impl
 
         public async Task<Paper> GetPaperById(Id<int> idInt)
         {
-            var paper = await paperRepository.GetPaperById(idInt.ToDao());
+            var paper = await paperRepository.GetPaperById(idInt.ToDto());
             return paper.ToDomain();
         }
 
@@ -37,7 +37,7 @@ namespace TourOfHeroesCore.Impl
 
         public async Task<IdInt> Publish(Paper paper)
         {
-            var result = await paperRepository.AddPapers(paper.ToDao());
+            var result = await paperRepository.AddPapers(paper.ToDto());
             await eventBus.Publish(new PaperPublishedEvent(new PaperEventArgs(paper)));
 
             return result.ToDomain();
@@ -45,7 +45,7 @@ namespace TourOfHeroesCore.Impl
 
         public async Task<IdInt> UpdatePaper(Paper updatedPaper)
         {
-            var paperDao = updatedPaper.ToDao();
+            var paperDao = updatedPaper.ToDto();
             var updateId = await paperRepository.Update(paperDao);
             await eventBus.Publish(new PaperUpdatedEvent(new PaperEventArgs(updatedPaper)));
             return updateId.ToDomain();
