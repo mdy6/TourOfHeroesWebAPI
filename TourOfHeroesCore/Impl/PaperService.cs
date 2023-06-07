@@ -3,7 +3,7 @@ using TourOfHeroesCore.Event.PaperEvent;
 using TourOfHeroesCore.Interfaces;
 using TourOfHeroesCore.Interfaces.Repository;
 using TourOfHeroesCore.Model;
-using TourOfHeroesCore.Model.DAO;
+using TourOfHeroesCore.Model.DTO;
 using TourOfHeroesCore.Model.Extensions;
 
 namespace TourOfHeroesCore.Impl
@@ -21,7 +21,7 @@ namespace TourOfHeroesCore.Impl
 
         public Task DeletePaperByHeroId(Id<int> heroId)
         {
-            return paperRepository.DeleteByHeroId(new IdDao(heroId.Value));
+            return paperRepository.DeleteByHeroId(new IdDto(heroId.Value));
         }
 
         public async Task<Paper> GetPaperById(Id<int> idInt)

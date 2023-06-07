@@ -1,10 +1,10 @@
-﻿using TourOfHeroesCore.Model.DAO;
+﻿using TourOfHeroesCore.Model.DTO;
 
 namespace TourOfHeroesCore.Model.Extensions
 {
     public static class ObjectExtensions
     {
-        public static Paper ToDomain(this PaperDao paperDao)
+        public static Paper ToDomain(this PaperDto paperDao)
         {
             return new Paper()
             {
@@ -20,9 +20,9 @@ namespace TourOfHeroesCore.Model.Extensions
             };
         }
 
-        public static PaperDao ToDao(this Paper paper)
+        public static PaperDto ToDao(this Paper paper)
         {
-            return new PaperDao(paper.Id.Value,
+            return new PaperDto(paper.Id.Value,
                                 paper.Title,
                                 paper.Description,
                                 paper.Content.Value,
@@ -33,16 +33,16 @@ namespace TourOfHeroesCore.Model.Extensions
                                 paper.Author.Id.Value);
         }
 
-        public static IdDao ToDao(this Id<int> id) 
+        public static IdDto ToDao(this Id<int> id) 
         {
-            return new IdDao(id.Value);
+            return new IdDto(id.Value);
         }
-        public static IdInt ToDomain(this IdDao id) 
+        public static IdInt ToDomain(this IdDto id) 
         {
             return IdInt.Create(id.IdValue);
         }
 
-        public static Hero ToDomain(this HeroDao heroDao)
+        public static Hero ToDomain(this HeroDto heroDao)
         {
             return new Hero()
             {

@@ -4,6 +4,7 @@ using TourOfHeroesCore.Interfaces;
 using TourOfHeroesCore.Interfaces.Helpers;
 using TourOfHeroesCore.Interfaces.Repository;
 using TourOfHeroesCore.Model;
+using TourOfHeroesCore.Model.DTO;
 using TourOfHeroesCore.Model.Extensions;
 
 namespace TourOfHeroesCore.Impl
@@ -36,7 +37,7 @@ namespace TourOfHeroesCore.Impl
             await PublishPopularityIncreaseEvent(newHeroPopularity, currentHero, heroToUpdate);
         }
 
-        private async Task PublishPopularityIncreaseEvent(int newHeroPopularity, Model.DAO.HeroDao currentHero, Model.DAO.HeroDao heroToUpdate)
+        private async Task PublishPopularityIncreaseEvent(int newHeroPopularity, HeroDto currentHero, HeroDto heroToUpdate)
         {
             if (currentHero.Popularity < newHeroPopularity)
                 await eventBus.Publish(new HeroPopularityIncreaseEvent(heroToUpdate.ToDomain()));

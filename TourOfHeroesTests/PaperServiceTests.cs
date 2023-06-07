@@ -7,7 +7,7 @@ using TourOfHeroesCore.Impl;
 using TourOfHeroesCore.Interfaces;
 using TourOfHeroesCore.Interfaces.Repository;
 using TourOfHeroesCore.Model;
-using TourOfHeroesCore.Model.DAO;
+using TourOfHeroesCore.Model.DTO;
 using static TourOfHeroesTests.HeroServiceTests;
 
 namespace TourOfHeroesTests
@@ -46,7 +46,7 @@ namespace TourOfHeroesTests
         [Fact]
         public async Task when_paper_is_updated_then_reader_are_notified()
         {
-            PaperDao paperInsert = new PaperDao(3, "hero2article", string.Empty, string.Empty, DateTimeOffset.MinValue, 0, 2, 3, 1);
+            PaperDto paperInsert = new PaperDto(3, "hero2article", string.Empty, string.Empty, DateTimeOffset.MinValue, 0, 2, 3, 1);
             await _paperRepository.AddPapers(paperInsert);
 
             Paper existingPaper = await _paperService.GetPaperById(IdInt.Create(3));
@@ -60,7 +60,7 @@ namespace TourOfHeroesTests
             await _paperService.UpdatePaper(existingPaper);
 
 
-            PaperDao[] paperDaos = await _paperRepository.GetPapers();
+            PaperDto[] paperDaos = await _paperRepository.GetPapers();
             paperDaos.Length.Should().Be(1);
             paperDaos[0].Content.Should().Be(newContentValue);
             paperDaos[0].Title.Should().Be(newTitle);

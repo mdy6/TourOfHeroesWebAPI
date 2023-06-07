@@ -5,7 +5,7 @@ using System.Data;
 using System.Data.SqlClient;
 using TourOfHeroesCore.Configuration;
 using TourOfHeroesCore.Interfaces.Repository;
-using TourOfHeroesCore.Model.DAO;
+using TourOfHeroesCore.Model.DTO;
 
 namespace TourOfHeroesRepository.Repository.Impl
 {
@@ -20,26 +20,26 @@ namespace TourOfHeroesRepository.Repository.Impl
 
         public IDbConnection DbConnection { get; }
 
-        public Task<IdDao> AddHero(HeroDao heroDao)
+        public Task<IdDto> AddHero(HeroDto heroDao)
         {
             throw new NotImplementedException();
         }
 
-        public Task DeleteHero(IdDao idDao)
+        public Task DeleteHero(IdDto idDao)
         {
             throw new NotImplementedException();
         }
 
-        public Task<HeroDao> GetHeroById(IdDao id)
+        public Task<HeroDto> GetHeroById(IdDto id)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<HeroDao[]> GetHeroes()
+        public async Task<HeroDto[]> GetHeroes()
         {
             using var connection = new SqlConnection(databaseInfoOptions.Value.ConnectionString);
             var getHeroesQuery = GetSqlQueryContent("GetHeroes.sql");
-            return (await connection.QueryAsync<HeroDao>(getHeroesQuery)).ToArray();
+            return (await connection.QueryAsync<HeroDto>(getHeroesQuery)).ToArray();
         }
 
         private string GetSqlQueryContent(string sqlFileName)
@@ -47,12 +47,12 @@ namespace TourOfHeroesRepository.Repository.Impl
             return File.ReadAllText($"{databaseInfoOptions.Value.SqlScriptPath}\\{sqlFileName}");
         }
 
-        public Task<PaperDao[]> GetHeroPapers(IdDao heroId)
+        public Task<PaperDto[]> GetHeroPapers(IdDto heroId)
         {
             throw new NotImplementedException();
         }
 
-        public Task UpdateHero(HeroDao heroToUpdate)
+        public Task UpdateHero(HeroDto heroToUpdate)
         {
             throw new NotImplementedException();
         }

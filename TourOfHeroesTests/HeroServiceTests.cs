@@ -6,7 +6,7 @@ using TourOfHeroesCore.Impl;
 using TourOfHeroesCore.Interfaces;
 using TourOfHeroesCore.Interfaces.Helpers;
 using TourOfHeroesCore.Model;
-using TourOfHeroesCore.Model.DAO;
+using TourOfHeroesCore.Model.DTO;
 
 namespace TourOfHeroesTests
 {
@@ -74,7 +74,7 @@ namespace TourOfHeroesTests
             _paperService.Setup(m => m.Publish(It.IsAny<Paper>()))
                 .Callback(() =>
                 {
-                    _paperRepository.AddPapers(new PaperDao(3, "hero2article", string.Empty, string.Empty, DateTimeOffset.MinValue, 0, 2, 3, 1));
+                    _paperRepository.AddPapers(new PaperDto(3, "hero2article", string.Empty, string.Empty, DateTimeOffset.MinValue, 0, 2, 3, 1));
                 })
                  .Returns(Task.FromResult(new IdInt(3)));
 

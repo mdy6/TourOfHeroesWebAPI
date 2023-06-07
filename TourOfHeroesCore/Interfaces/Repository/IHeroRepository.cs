@@ -4,17 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TourOfHeroesCore.Model;
-using TourOfHeroesCore.Model.DAO;
+using TourOfHeroesCore.Model.DTO;
 
 namespace TourOfHeroesCore.Interfaces.Repository
 {
     public interface IHeroRepository
     {
-        Task<HeroDao> GetHeroById(IdDao id);
-        Task<IdDao> AddHero(HeroDao heroDao);
-        Task<PaperDao[]> GetHeroPapers(IdDao heroId);
-        Task UpdateHero(HeroDao heroToUpdate);
-        Task DeleteHero(IdDao idDao);
-        Task<HeroDao[]> GetHeroes();
+        Task<HeroDto> GetHeroById(IdDto id);
+        Task<IdDto> AddHero(HeroDto heroDao);
+        Task<PaperDto[]> GetHeroPapers(IdDto heroId);
+        Task UpdateHero(HeroDto heroToUpdate);
+        Task DeleteHero(IdDto idDao);
+        Task<HeroDto[]> GetHeroes();
     }
 }

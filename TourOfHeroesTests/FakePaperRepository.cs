@@ -1,39 +1,39 @@
 ﻿using TourOfHeroesCore.Interfaces.Repository;
-using TourOfHeroesCore.Model.DAO;
+using TourOfHeroesCore.Model.DTO;
 
 namespace TourOfHeroesTests
 {
 
     public class FakePaperRepository : IPaperRepository
     {
-        private readonly List<PaperDao> _paperDaos = new List<PaperDao>() { };
-        private readonly PaperDao DEFAULT_PAPER = new PaperDao(0, string.Empty, string.Empty, string.Empty, DateTimeOffset.MinValue, 0, 0, 0, 0);
-        public Task<IdDao> AddPapers(PaperDao paper)
+        private readonly List<PaperDto> _paperDaos = new List<PaperDto>() { };
+        private readonly PaperDto DEFAULT_PAPER = new PaperDto(0, string.Empty, string.Empty, string.Empty, DateTimeOffset.MinValue, 0, 0, 0, 0);
+        public Task<IdDto> AddPapers(PaperDto paper)
         {
             _paperDaos.Add(paper);
-            return Task.FromResult(new IdDao(_paperDaos.Count));
+            return Task.FromResult(new IdDto(_paperDaos.Count));
         }
 
-        public Task DeleteByHeroId(IdDao idDao)
+        public Task DeleteByHeroId(IdDto idDao)
         {
             throw new NotImplementedException();
         }
 
-        public Task<PaperDao> GetPaperById(IdDao id)
+        public Task<PaperDto> GetPaperById(IdDto id)
         {
             return Task.FromResult(_paperDaos.FirstOrDefault(t => t.PaperId == id.IdValue) ?? DEFAULT_PAPER);
         }
 
-        public Task<PaperDao[]> GetPapers()
+        public Task<PaperDto[]> GetPapers()
         {
             return Task.FromResult(_paperDaos.ToArray());
         }
 
-        public Task<IdDao> Update(PaperDao paperDao)
+        public Task<IdDto> Update(PaperDto paperDao)
         {
             var index = _paperDaos.FindIndex(p => p.PaperId == paperDao.PaperId);
             _paperDaos[index] = paperDao;
-            return Task.FromResult(new IdDao(_paperDaos[index].HeroId));
+            return Task.FromResult(new IdDto(_paperDaos[index].HeroId));
         }
     }
 }

@@ -1,1 +1,1 @@
-﻿select [HeroId],[Name],[PowerType],[Strength], [Popularity], [LastUpdate] from [Hero]
+﻿select [HeroId],[Name],[PowerTypeId],[Strength], [Popularity], [LastUpdate] from [Hero]
