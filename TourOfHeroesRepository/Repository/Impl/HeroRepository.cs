@@ -45,9 +45,11 @@ namespace TourOfHeroesRepository.Repository.Impl
             return new SqlConnection(databaseInfoOptions.Value.ConnectionString);
         }
 
-        public Task<HeroDto> GetHeroById(IdDto id)
+        public async Task<HeroDto> GetHeroById(IdDto id)
         {
-            throw new NotImplementedException();
+            using var connection = GetConnection();
+            var hero = await connection.QueryFirstAsync<HeroDao>(GetSqlQueryContent("GetHeroById.sql"), new { HeroId = id.IdValue });
+            return hero.ToDto();
         }
 
         public async Task<HeroDto[]> GetHeroes()

@@ -18,8 +18,9 @@ builder.Services.AddSingleton<IEventBus, EventBus>();
 builder.Services.AddSingleton<IDateTimeProvider, DateTimeProvider>();
 builder.Services.AddScoped<IHeroRepository, HeroRepository>();
 builder.Services.AddScoped<IHeroService, HeroService>();
+builder.Services.AddScoped<IPaperService, PaperService>();
 builder.Services.AddSingleton<IReaderNotifier<HeroEventArgs>, ReaderNotifierHero>();
-builder.Services.AddSingleton<IReaderNotifier<PaperEventArgs>, ReaderNotifierHero>();
+builder.Services.AddSingleton<IReaderNotifier<PaperEventArgs>, ReaderPaperNotifier>();
 builder.Services.AddSingleton<IEventHandler, HeroEventHandlers>();
 builder.Services.AddSingleton<IEventHandler, PaperEventHandlers>();
 
