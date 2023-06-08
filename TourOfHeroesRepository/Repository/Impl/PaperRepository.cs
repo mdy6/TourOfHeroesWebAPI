@@ -30,9 +30,6 @@ namespace TourOfHeroesRepository.Repository.Impl
             {
                 throw ex;
             }
-            //if (id is null || id.FirstOrDefault() == 0)
-            //    throw new ObjectNotInsertedException("This hero has not been inserted");
-            //return 
         }
 
         public Task DeleteByHeroId(IdDto idDao)
