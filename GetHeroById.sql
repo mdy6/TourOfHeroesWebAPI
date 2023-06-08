@@ -1,0 +1,1 @@
+﻿SELECT TOP 1 [HeroId],[Name],[PowerTypeId],[Strength], [Popularity], [LastUpdate] from [Hero] WHERE [HeroId] = @HeroId

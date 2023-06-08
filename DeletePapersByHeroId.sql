@@ -1,0 +1,1 @@
+﻿DELETE FROM [dbo].[Paper] WHERE [HeroId] = @HeroId

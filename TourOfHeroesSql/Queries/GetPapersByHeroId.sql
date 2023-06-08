@@ -1,0 +1,11 @@
+﻿SELECT [PaperId]
+      ,[Title]
+      ,[Description]
+      ,[Content]
+      ,[PublicationDate]
+      ,[Like]
+      ,[DontLike]
+      ,[HeroId]
+      ,[AuthorId]
+  FROM [dbo].[Paper]
+  WHERE [HeroId] = @HeroId

@@ -1,8 +1,8 @@
 ﻿using System.Text.Json;
 using TourOfHeroesCore.Event.HeroEvent;
-using TourOfHeroesCore.Impl;
+using TourOfHeroesCore.Interfaces;
 
-namespace TourOfHeroesCore.Interfaces
+namespace TourOfHeroesCore.Impl
 {
     public class ReaderNotifierHero : IReaderNotifier<HeroEventArgs>
     {

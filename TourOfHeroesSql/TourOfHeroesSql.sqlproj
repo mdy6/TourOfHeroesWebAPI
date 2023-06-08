@@ -65,6 +65,7 @@
     <Build Include="Tables\Paper.sql" />
     <Build Include="Tables\Role.sql" />
     <Build Include="Tables\UserRole.sql" />
+    <None Include="Queries\Copy of GetPapers.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="TourOfHeroesSql.refactorlog" />
@@ -74,6 +75,10 @@
     <None Include="Queries\InsertHero.sql" />
     <None Include="Queries\DeleteHero.sql" />
     <None Include="Queries\GetHeroById.sql" />
+    <None Include="Queries\GetPapersByHeroId.sql" />
+    <None Include="Queries\GetPapers.sql" />
+    <None Include="Queries\DeletePapersByHeroId.sql" />
+    <None Include="Queries\UpsertPaper.sql" />
   </ItemGroup>
   <PropertyGroup>
     <PostBuildEvent>copy $(ProjectDir)Queries\* $(SolutionDir)</PostBuildEvent>
