@@ -19,7 +19,6 @@ IF (@@ROWCOUNT = 0)
 			   ,[DontLike]
 			   ,[HeroId]
 			   ,[AuthorId])
-		OUTPUT INSERTED.PaperId
 		 VALUES
 			   ( @Title
 			   ,@Description 
@@ -29,3 +28,4 @@ IF (@@ROWCOUNT = 0)
 			   ,@DontLike
 			   ,@HeroId     
 			   , @AuthorId)
+	SELECT SCOPE_IDENTITY()

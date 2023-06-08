@@ -30,6 +30,11 @@ namespace TourOfHeroesCore.Impl
             return paper.ToDomain();
         }
 
+        public async Task<Paper[]> GetPapers()
+        {
+            return (await paperRepository.GetPapers()).Select(p => p.ToDomain()).ToArray();
+        }
+
         public async Task<Paper[]> GetPapersByHeroId(Id<int> heroId)
         {
             return (await paperRepository.GetPapers()).Where(h => h.HeroId == heroId.Value).Select(p => p.ToDomain()).ToArray();

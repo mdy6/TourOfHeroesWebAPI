@@ -2,8 +2,8 @@
 (
 	[PaperId] INT NOT NULL  IDENTITY(1,1) , 
     [Title] VARCHAR(250) NOT NULL, 
-    [Description] VARBINARY(500) NULL, 
-    [Content] VARBINARY(MAX) NULL, 
+    [Description] VARCHAR(500) NULL, 
+    [Content] varchar(MAX) NULL, 
     [PublicationDate] DATETIMEOFFSET NOT NULL, 
     [Like] INT NOT NULL DEFAULT 0, 
     [DontLike] INT NOT NULL DEFAULT 0, 

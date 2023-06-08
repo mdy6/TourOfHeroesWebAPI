@@ -18,7 +18,14 @@ namespace TourOfHeroesWebAPI.Controllers
         public async Task<IActionResult> GetAllHeroes()
         {
             var heroes = await heroService.GetHeroes();
-            return heroes == null ? NotFound() : Ok(heroes);
+            return heroes == null ? NotFound() : Ok(heroes.Select(h => h.ToOutput()));
+        }
+        
+        [HttpGet("{heroId}",Name ="GetHeroById")]
+        public async Task<IActionResult> GetHeroById(int heroId)
+        {
+            var hero = await heroService.GetHeroById(IdInt.Create(heroId));
+            return hero == null ? NotFound() : Ok(hero.ToOutput());
         }
 
         [HttpPost(Name = "CreateHero")]

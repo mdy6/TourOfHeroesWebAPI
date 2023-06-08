@@ -65,14 +65,14 @@
     <Build Include="Tables\Paper.sql" />
     <Build Include="Tables\Role.sql" />
     <Build Include="Tables\UserRole.sql" />
-    <None Include="Queries\Copy of GetPapers.sql" />
+    <Build Include="Queries\UpsertHero.sql" />
+    <Build Include="Queries\GetPaperById.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="TourOfHeroesSql.refactorlog" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Queries\GetHeroes.sql" />
-    <None Include="Queries\InsertHero.sql" />
     <None Include="Queries\DeleteHero.sql" />
     <None Include="Queries\GetHeroById.sql" />
     <None Include="Queries\GetPapersByHeroId.sql" />

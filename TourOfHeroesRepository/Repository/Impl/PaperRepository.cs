@@ -19,11 +19,20 @@ namespace TourOfHeroesRepository.Repository.Impl
         {
             using var connection = options.GetConnection();
             var paperToInsert = paper.ToDao();
-            var id = await connection.QueryAsync<int>(options.GetSqlQueryContent("UpsertPaper.sql"),
-                                                      new { HeroId = paperToInsert.HeroId, Title = paperToInsert.Title, Description = paperToInsert.Description, Content = paperToInsert.Content, PublicationDate = paperToInsert.PublicationDate, Like = paperToInsert.Like, DontLike = paperToInsert.DontLike, AuthorId = paperToInsert.AuthorId });
-            if (id is null || id.FirstOrDefault() == 0)
-                throw new ObjectNotInsertedException("This hero has not been inserted");
-            return new IdDto(id.FirstOrDefault());
+
+            try
+            {
+                var id = await connection.QueryAsync<int>(options.GetSqlQueryContent("UpsertPaper.sql"),
+                                                          new { HeroId = paperToInsert.HeroId, Title = paperToInsert.Title, Description = paperToInsert.Description, Content = paperToInsert.Content, PublicationDate = paperToInsert.PublicationDate, Like = paperToInsert.Like, DontLike = paperToInsert.DontLike, AuthorId = paperToInsert.AuthorId, PaperId = paperToInsert.PaperId });
+                return new IdDto(id.FirstOrDefault());
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            //if (id is null || id.FirstOrDefault() == 0)
+            //    throw new ObjectNotInsertedException("This hero has not been inserted");
+            //return 
         }
 
         public Task DeleteByHeroId(IdDto idDao)
@@ -52,9 +61,9 @@ namespace TourOfHeroesRepository.Repository.Impl
             using var connection = options.GetConnection();
             var paperToUpdate = paper.ToDao();
             var id = await connection.QueryAsync<int>(options.GetSqlQueryContent("UpsertPaper.sql"),
-                                                      new { HeroId = paperToUpdate.HeroId, Title = paperToUpdate.Title, Description = paperToUpdate.Description, Content = paperToUpdate.Content, PublicationDate = paperToUpdate.PublicationDate, Like = paperToUpdate.Like, DontLike = paperToUpdate.DontLike, AuthorId = paperToUpdate.AuthorId });
+                                                      new { HeroId = paperToUpdate.HeroId, Title = paperToUpdate.Title, Description = paperToUpdate.Description, Content = paperToUpdate.Content, PublicationDate = paperToUpdate.PublicationDate, Like = paperToUpdate.Like, DontLike = paperToUpdate.DontLike, AuthorId = paperToUpdate.AuthorId, PaperId = paperToUpdate.PaperId });
             if (id is null || id.FirstOrDefault() == 0)
-                throw new ObjectNotInsertedException("This hero has not been inserted");
+                throw new ObjectNotInsertedException("This paper has not been inserted");
             return new IdDto(id.FirstOrDefault());
         }
     }
