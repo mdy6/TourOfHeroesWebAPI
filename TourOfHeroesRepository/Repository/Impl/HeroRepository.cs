@@ -19,11 +19,11 @@ namespace TourOfHeroesRepository.Repository.Impl
         {
             using var connection = options.GetConnection();
             var heroToInsert = heroDto.ToDao();
-            var id = await connection.QueryAsync<int>(options.GetSqlQueryContent("UpsertHero.sql"),
+            var id = await connection.ExecuteScalarAsync<int>(options.GetSqlQueryContent("UpsertHero.sql"),
                                                       new {HeroId = heroToInsert.HeroId , Name = heroToInsert.Name, Popularity = heroToInsert.Popularity, Strength = heroToInsert.Strength, PowerTypeId = heroToInsert.PowerTypeId, LastUpdate = heroToInsert.LastUpdate });
-            if (id is null || id.FirstOrDefault() == 0)
+            if (id  == 0)
                 throw new ObjectNotInsertedException("This hero has not been inserted");
-            return new IdDto(id.FirstOrDefault());
+            return new IdDto(id);
 
         }
 

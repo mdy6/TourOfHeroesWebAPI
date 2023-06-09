@@ -52,7 +52,7 @@ namespace TourOfHeroesWebAPI.Model.InputModel
         {
             return new HeroOutput()
             {
-                Id = hero.Id.Value,
+                HeroId = hero.Id.Value,
                 LastUpdate = hero.LastUpdate,
                 Name = hero.Name,
                 Populairty = hero.Popularity.Value,
