@@ -20,7 +20,7 @@ namespace TourOfHeroesWebAPI.Controllers
             var heroes = await heroService.GetHeroes();
             return heroes == null ? NotFound() : Ok(heroes.Select(h => h.ToOutput()));
         }
-        
+
         [HttpGet("{heroId}",Name ="GetHeroById")]
         public async Task<IActionResult> GetHeroById(int heroId)
         {
@@ -28,11 +28,11 @@ namespace TourOfHeroesWebAPI.Controllers
             return hero == null ? NotFound() : Ok(hero.ToOutput());
         }
 
-        [HttpPost(Name = "CreateHero")]
-        public async Task<IActionResult> CreateHero(InputHero inputHero)
+        [HttpPost(Name = "CreateOrUpdateHero")]
+        public async Task<IActionResult> CreateOrUpdateHero(InputHero inputHero)
         {
-            var inputId = await heroService.CreateHero(inputHero.ToDomain());
-            return Ok(inputId);
+            var inputId = await heroService.CreateOrUpdateHero(inputHero.ToDomain());
+            return Ok(inputId.Value);
         }
 
         [HttpDelete("{heroId}", Name = "DeleteHero")]

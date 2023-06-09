@@ -11,9 +11,8 @@ namespace TourOfHeroesCore.Interfaces.Repository
     public interface IHeroRepository
     {
         Task<HeroDto> GetHeroById(IdDto id);
-        Task<IdDto> AddHero(HeroDto heroDao);
+        Task<IdDto> AddOrUpdateHero(HeroDto heroDao);
         Task<PaperDto[]> GetHeroPapers(IdDto heroId);
-        Task UpdateHero(HeroDto heroToUpdate);
         Task DeleteHero(IdDto idDao);
         Task<HeroDto[]> GetHeroes();
     }

@@ -25,7 +25,7 @@ namespace TourOfHeroesTests
             this.paperRepository = paperRepository;
         }
 
-        public Task<IdDto> AddHero(HeroDto heroDao)
+        public Task<IdDto> AddOrUpdateHero(HeroDto heroDao)
         {
             var heroDaoToInsert = heroDao with
             {

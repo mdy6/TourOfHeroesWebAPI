@@ -33,7 +33,7 @@ namespace TourOfHeroesCore.Impl
                 Popularity = newHeroPopularity,
                 LastUpdate = dateTimeProvider.GetDateTime(),
             };
-            await heroRepository.UpdateHero(heroToUpdate);
+            await heroRepository.AddOrUpdateHero(heroToUpdate);
             await PublishPopularityIncreaseEvent(newHeroPopularity, currentHero, heroToUpdate);
         }
 
@@ -64,10 +64,11 @@ namespace TourOfHeroesCore.Impl
             return heroes.Select(p => p.ToDomain()).ToArray();
         }
 
-        public async Task<Id<int>> CreateHero(Hero hero)
+        public async Task<Id<int>> CreateOrUpdateHero(Hero hero)
         {
-            var insertedHeroId = await heroRepository.AddHero(hero.ToDto());
-            return IdInt.Create(insertedHeroId.IdValue);
+            var insertedOrUpdated = await heroRepository.AddOrUpdateHero(hero.ToDto());
+            return IdInt.Create(insertedOrUpdated.IdValue);
         }
+
     }
 }

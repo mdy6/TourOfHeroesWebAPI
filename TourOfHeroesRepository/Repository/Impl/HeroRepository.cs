@@ -15,7 +15,7 @@ namespace TourOfHeroesRepository.Repository.Impl
         {
         }
 
-        public async Task<IdDto> AddHero(HeroDto heroDto)
+        public async Task<IdDto> AddOrUpdateHero(HeroDto heroDto)
         {
             using var connection = options.GetConnection();
             var heroToInsert = heroDto.ToDao();
