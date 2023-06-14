@@ -24,6 +24,7 @@ builder.Services.AddSingleton<IReaderNotifier<HeroEventArgs>, ReaderNotifierHero
 builder.Services.AddSingleton<IReaderNotifier<PaperEventArgs>, ReaderPaperNotifier>();
 builder.Services.AddSingleton<IEventHandler, HeroEventHandlers>();
 builder.Services.AddSingleton<IEventHandler, PaperEventHandlers>();
+builder.Services.AddSingleton<INotificationPool, NotificationPool>();
 
 
 

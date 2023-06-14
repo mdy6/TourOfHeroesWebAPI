@@ -6,9 +6,15 @@ namespace TourOfHeroesCore.Impl
 {
     public class ReaderNotifierHero : IReaderNotifier<HeroEventArgs>
     {
+        private readonly INotificationPool notifcationPool;
+
+        public ReaderNotifierHero(INotificationPool notifcationPool)
+        {
+            this.notifcationPool = notifcationPool;
+        }
         public Task NotifyReaders(Notification<HeroEventArgs> notification)
         {
-            Console.WriteLine(JsonSerializer.Serialize(notification.NotificationArgs));
+            notifcationPool.PoolNotification(notification);
             return Task.CompletedTask;
         }
     }

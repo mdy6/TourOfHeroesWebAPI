@@ -28,7 +28,7 @@ namespace TourOfHeroesCore.Event.HeroEvent
             if (ev is HeroPopularityIncreaseEvent)
             {
                 var heroPopularityIncrease = ev as HeroPopularityIncreaseEvent;
-                return _notifier.NotifyReaders(new HeroNotification(heroPopularityIncrease.EventArgs));
+                return _notifier.NotifyReaders(new HeroPopularityIncreaseNotification(heroPopularityIncrease.EventArgs));
             }
             return Task.CompletedTask;
         }

@@ -1,4 +1,5 @@
-﻿using TourOfHeroesCore.Interfaces;
+﻿using System.Text.Json.Serialization;
+using TourOfHeroesCore.Interfaces;
 
 namespace TourOfHeroesCore.Impl
 {
@@ -11,9 +12,11 @@ namespace TourOfHeroesCore.Impl
 
         public T NotificationArgs { get; }
 
-        public virtual Task Notify()
+        public virtual string GetNotificationContent()
         {
-            return Task.CompletedTask;
+            return System.Text.Json.JsonSerializer.Serialize(NotificationArgs);
         }
     }
+
+
 }

@@ -22,12 +22,12 @@ namespace TourOfHeroesCore.Event.PaperEvent
             if(ev is PaperPublishedEvent)
             {
                 var publishedEvent = ev as PaperPublishedEvent;
-                return readerNotifier.NotifyReaders(new PaperNotification(publishedEvent?.EventArgs));
+                return readerNotifier.NotifyReaders(new PaperNotification(publishedEvent?.EventArgs, "pusblished"));
             }
             if(ev is PaperUpdatedEvent)
             {
                 var updatedEvent = ev as PaperUpdatedEvent;
-                return readerNotifier.NotifyReaders(new PaperNotification(updatedEvent?.EventArgs));
+                return readerNotifier.NotifyReaders(new PaperNotification(updatedEvent?.EventArgs, "updated"));
             }
             if(ev is HeroDeletedEvent)
             {

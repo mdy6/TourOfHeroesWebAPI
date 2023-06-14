@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TourOfHeroesCore.Event.PaperEvent
 {
-    public class PaperPublishedEvent : Event<PaperEventArgs>
+    public class PaperPublishedEvent : Event<  PaperEventArgs>
     {
         public PaperPublishedEvent(PaperEventArgs obj) : base(obj)
         {

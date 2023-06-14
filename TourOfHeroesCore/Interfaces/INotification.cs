@@ -2,6 +2,6 @@
 {
     public interface INotification
     {
-        Task Notify();
+        string GetNotificationContent();
     }
 }
